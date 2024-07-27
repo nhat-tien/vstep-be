@@ -3,6 +3,7 @@
 namespace App\Http\Services\Api;
 
 use App\Http\Resources\UserResource;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,7 @@ class AuthService
                            'name' => $credential['name'],
                            'email' => $credential['email'],
                            'password' => Hash::make($credential['password']),
-                           'role' => 'candidate',
+                           'role_id' => Role::firstWhere('role_name', 'candidate')->id,
                        ]);
 
             Auth::login($user);

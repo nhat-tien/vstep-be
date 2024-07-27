@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger("exam_id");
             $table->bigInteger("user_id");
             $table->date("date");
+            $table->string("image_url", length: 255)->nullable();
             $table->timestamps();
         });
     }
