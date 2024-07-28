@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\CandidateResource\Pages;
+use App\Filament\Resources\CandidateResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,11 +13,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class CandidateResource extends Resource
 {
+    protected static ?string $modelLabel = 'candidate';
+
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -31,7 +33,9 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('Họ tên'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('phone_number')->label("SĐT"),
             ])
             ->filters([
                 //
@@ -56,9 +60,16 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListCandidates::route('/'),
+            'create' => Pages\CreateCandidate::route('/create'),
+            'edit' => Pages\EditCandidate::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereHas('role', function($query) {
+          $query->where('role_name', 'candidate');
+        });
     }
 }
