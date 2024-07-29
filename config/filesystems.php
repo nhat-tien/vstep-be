@@ -47,7 +47,8 @@ return [
         'files' => [
             'driver' => 'local',
             'root' => storage_path('app/files'),
-            'visibility' => 'private'
+            'visibility' => 'private',
+            'throw' => true
         ],
 
         's3' => [

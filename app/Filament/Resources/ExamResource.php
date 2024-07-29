@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CandidateResource\Pages;
-use App\Filament\Resources\CandidateResource\RelationManagers;
-use App\Models\User;
+use App\Filament\Resources\ExamResource\Pages;
+use App\Filament\Resources\ExamResource\RelationManagers;
+use App\Models\Exam;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CandidateResource extends Resource
+class ExamResource extends Resource
 {
-    protected static ?string $modelLabel = 'candidate';
+    protected static ?string $model = Exam::class;
 
-    protected static ?string $model = User::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -33,9 +31,7 @@ class CandidateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label("Họ và tên"),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone_number')->label("SĐT"),
+                //
             ])
             ->filters([
                 //
@@ -60,16 +56,9 @@ class CandidateResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCandidates::route('/'),
-            'create' => Pages\CreateCandidate::route('/create'),
-            'edit' => Pages\EditCandidate::route('/{record}/edit'),
+            'index' => Pages\ListExams::route('/'),
+            'create' => Pages\CreateExam::route('/create'),
+            'edit' => Pages\EditExam::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->whereHas('role', function($query) {
-          $query->where('role_name', 'candidate');
-        });
     }
 }

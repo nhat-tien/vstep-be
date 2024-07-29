@@ -2,65 +2,54 @@
 @font-face {
   font-family: "Inter";
   src: url("../fonts/Inter-Light.ttf");
-  font-family: 300;
+  font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Inter";
   src: url("../fonts/Inter-Regular.ttf");
-  font-family: 400;
+  font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-Medium.ttf");
-  font-famiy: 800;
+  src: url("../fonts/Inter-Regular.ttf");
+  font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Inter";
   src: url("../fonts/Inter-SemiBold.ttf");
-  font-famiy: 900;
+  font-weight: 600;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-SemiBold.ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Bold.ttf");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-ExtraBold.ttf");
+  font-weight: 900;
+  font-display: swap;
+}
+
+
 
 
 
