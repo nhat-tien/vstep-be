@@ -23,7 +23,6 @@ class ExamResource extends Resource
     {
         return $form
             ->schema([
-                //
             ]);
     }
 

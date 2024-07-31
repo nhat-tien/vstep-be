@@ -15,11 +15,18 @@ class AuthController extends Controller
     {
     }
 
-
     public function login(LoginRequest $request): JsonResponse
     {
         $response = $this->auth->login($request->safe()->only(["email", "password"]));
-        return response()->json($response, $response['status']);
+
+            return ;
+        return response()->json([
+                "status" => 200,
+                'message' => 'Login Successful',
+                'token' => $token->plainTextToken,
+                'tokenType' => 'Bearer',
+                'user' => new UserResource($user),
+            ], $response['status']);
     }
 
     public function register(RegisterRequest $request): JsonResponse
