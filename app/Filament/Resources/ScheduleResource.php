@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ExamResource\Pages;
-use App\Filament\Resources\ExamResource\RelationManagers;
-use App\Models\Exam;
+use App\Filament\Resources\ScheduleResource\Pages;
+use App\Filament\Resources\ScheduleResource\RelationManagers;
+use App\Models\ExamSchedule;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ExamResource extends Resource
+class ScheduleResource extends Resource
 {
-    protected static ?string $model = Exam::class;
+
+    protected static ?string $modelLabel = 'schedule';
+
+    protected static ?string $model = ExamSchedule::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,7 +26,7 @@ class ExamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("name")
+                //
             ]);
     }
 
@@ -31,7 +34,7 @@ class ExamResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make("name")
+                //
             ])
             ->filters([
                 //
@@ -56,9 +59,9 @@ class ExamResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListExams::route('/'),
-            'create' => Pages\CreateExam::route('/create'),
-            'edit' => Pages\EditExam::route('/{record}/edit'),
+            'index' => Pages\ListSchedules::route('/'),
+            'create' => Pages\CreateSchedule::route('/create'),
+            'edit' => Pages\EditSchedule::route('/{record}/edit'),
         ];
     }
 }

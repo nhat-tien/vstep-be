@@ -10,6 +10,10 @@ class Exam extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name",
+    ];
+
     public function examSchedules(): HasMany
     {
         return $this->hasMany(ExamSchedule::class);

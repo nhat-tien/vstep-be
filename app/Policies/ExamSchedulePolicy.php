@@ -13,7 +13,7 @@ class ExamSchedulePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+       return $user->isAdmin();
     }
 
     /**
@@ -29,7 +29,7 @@ class ExamSchedulePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**

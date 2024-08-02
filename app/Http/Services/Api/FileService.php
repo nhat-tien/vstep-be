@@ -13,9 +13,8 @@ class FileService {
         $image = $request->file('avatar');
         $ext = $request->file('avatar')->getClientOriginalExtension();
         $date = date("Y-m-d-H:i:s");
-        $user_id = auth()->id;
-        $exam_schedule_id = $request->
-        $path = Storage::disk('files')->putFileAs("avatars/{$user_id}", $image,"{$date}.{$ext}");
+        $exam_schedule_id = $request->examScheduleId;
+        $path = Storage::disk('files')->putFileAs("avatars/{$exam_schedule_id}", $image,"{$date}.{$ext}");
         return $path;
     }
 

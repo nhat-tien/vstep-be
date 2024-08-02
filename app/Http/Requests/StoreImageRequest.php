@@ -23,7 +23,7 @@ class StoreImageRequest extends FormRequest
     {
         return [
             'examScheduleId' => ['required', 'numberic'],
-            'avatar' => ['required', 'extensions:jpg,png'],
+            'avatar' => ['required', 'file', 'extensions:jpg,png'],
         ];
     }
 }

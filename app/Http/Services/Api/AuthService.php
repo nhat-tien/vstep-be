@@ -35,10 +35,11 @@ class AuthService
             return [
                 "status" => 200,
                 'message' => 'Login Successful',
-                'token' => $token->plainTextToken,
+                'accessToken' => $token->plainTextToken,
                 'tokenType' => 'Bearer',
                 'user' => new UserResource($user),
             ];
+
         } catch(\Throwable $th) {
             return [
                  'status' => 500,
@@ -76,7 +77,7 @@ class AuthService
             return [
                 "status" => 200,
                 'message' => 'User Created Successful',
-                'token' => $token->plainTextToken,
+                'accessToken' => $token->plainTextToken,
                 'tokenType' => 'Bearer',
                 'user' => new UserResource($user),
             ];
