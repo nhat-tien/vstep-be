@@ -14,4 +14,15 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public static function getCandidateId(): int
+    {
+        return Role::firstWhere('role_name', 'candidate')->id;
+    }
+
+    public static function getAdminId(): int
+    {
+        return Role::firstWhere('role_name', 'admin')->id;
+    }
+
 }

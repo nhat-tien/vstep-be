@@ -7,4 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/storage/files/{path}', FilesController::class)->middleware("auth:sanctum");
+Route::get('/storage/files/{slug}', FilesController::class)
+    ->where('slug', '.*')
+    ->middleware('auth:sanctum');
+

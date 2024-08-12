@@ -22,7 +22,7 @@ class StoreImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'examScheduleId' => ['required', 'numberic'],
+            'examScheduleId' => ['required', 'numeric'],
             'avatar' => ['required', 'file', 'extensions:jpg,png'],
         ];
     }

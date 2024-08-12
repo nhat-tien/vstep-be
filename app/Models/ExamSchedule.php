@@ -11,6 +11,12 @@ class ExamSchedule extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "user_id",
+        "exam_id",
+        "date",
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

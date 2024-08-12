@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ExamScheduleController extends Controller
 {
-    public function __construct(ExamScheduleService $service)
+    public function __construct(private ExamScheduleService $service)
     {
     }
+
     public function setAvatar(StoreImageRequest $request): JsonResponse
     {
         $exam_schedule = ExamSchedule::find($request->examScheduleId);

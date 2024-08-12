@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ScheduleResource\Pages;
-use App\Filament\Resources\ScheduleResource\RelationManagers;
-use App\Models\ExamSchedule;
+use App\Filament\Resources\ResultResource\Pages;
+use App\Filament\Resources\ResultResource\RelationManagers;
+use App\Models\Result;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,12 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ScheduleResource extends Resource
+class ResultResource extends Resource
 {
-
-    protected static ?string $modelLabel = 'schedule';
-
-    protected static ?string $model = ExamSchedule::class;
+    protected static ?string $model = Result::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -26,7 +23,7 @@ class ScheduleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('date')
+                //
             ]);
     }
 
@@ -34,10 +31,7 @@ class ScheduleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('date')->label("Date"),
-                Tables\Columns\TextColumn::make('user.name')->label("Candidate"),
-                Tables\Columns\TextColumn::make('exam.name')->label("Exam"),
-                Tables\Columns\ImageColumn::make('image_url')->label("Avatar")->disk("files"),
+                //
             ])
             ->filters([
                 //
@@ -62,9 +56,9 @@ class ScheduleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSchedules::route('/'),
-            'create' => Pages\CreateSchedule::route('/create'),
-            'edit' => Pages\EditSchedule::route('/{record}/edit'),
+            'index' => Pages\ListResults::route('/'),
+            'create' => Pages\CreateResult::route('/create'),
+            'edit' => Pages\EditResult::route('/{record}/edit'),
         ];
     }
 }

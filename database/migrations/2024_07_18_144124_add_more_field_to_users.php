@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer("role_id")->nullable();
+            $table->char("sex", length: 1)->nullable();
             $table->string("phone_number", length: 20)->nullable();
             $table->string("candidate_id", length: 50)->nullable();
         });

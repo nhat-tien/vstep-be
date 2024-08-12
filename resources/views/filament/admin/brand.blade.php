@@ -1,1 +1,1 @@
-<h1 style="font-weight: 700;">VSTEP</h1>
+<h1 style="font-weight: 700;">VSTEP MANAGEMENT</h1>

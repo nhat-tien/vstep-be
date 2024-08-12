@@ -9,6 +9,7 @@
         "dedoc/scramble": "^0.11.9",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
+        "laravel/octane": "^2.5",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "wendelladriel/laravel-validated-dto": "^3.8"
