@@ -11,6 +11,12 @@ class QuestionSelectOption extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "question_id",
+        "order",
+        "text",
+    ];
+
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);

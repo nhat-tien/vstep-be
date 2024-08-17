@@ -2,17 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SkillResource\Pages;
-use App\Models\Skill;
+use App\Filament\Resources\QuestionSelectOptionResource\Pages;
+use App\Filament\Resources\QuestionSelectOptionResource\RelationManagers;
+use App\Models\QuestionSelectOption;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SkillResource extends Resource
+class QuestionSelectOptionResource extends Resource
 {
-    protected static ?string $model = Skill::class;
+    protected static ?string $model = QuestionSelectOption::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -22,7 +25,7 @@ class SkillResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("skill_name")->label("Skill name")
+                //
             ]);
     }
 
@@ -30,7 +33,9 @@ class SkillResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('skill_name')->label("Skill name")
+                Tables\Columns\TextColumn::make("question_id"),
+                Tables\Columns\TextColumn::make("order"),
+                Tables\Columns\TextColumn::make("text"),
             ])
             ->filters([
                 //
@@ -55,9 +60,9 @@ class SkillResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSkills::route('/'),
-            'create' => Pages\CreateSkill::route('/create'),
-            'edit' => Pages\EditSkill::route('/{record}/edit'),
+            'index' => Pages\ListQuestionSelectOptions::route('/'),
+            'create' => Pages\CreateQuestionSelectOption::route('/create'),
+            'edit' => Pages\EditQuestionSelectOption::route('/{record}/edit'),
         ];
     }
 }

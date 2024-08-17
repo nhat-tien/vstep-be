@@ -16,8 +16,8 @@ return new class () extends Migration {
             $table->bigInteger("skill_id");
             $table->tinyInteger("order");
             $table->string("question_type", length: 10);
-            $table->string("audio_url", length: 255)->nullable();
-            $table->mediumText("text");
+            $table->string("file_url", length: 255)->nullable();
+            $table->mediumText("text")->nullable();
             $table->timestamps();
         });
     }

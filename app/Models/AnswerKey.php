@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class AnswerKey extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        "question_select_option_id",
+        "question_id",
+    ];
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);

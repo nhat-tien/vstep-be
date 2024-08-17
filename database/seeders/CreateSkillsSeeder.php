@@ -14,10 +14,10 @@ class CreateSkillsSeeder extends Seeder
     public function run(): void
     {
         $skills = [
-            "Listening",
-            "Writing",
-            "Speaking",
-            "Reading",
+            "listening",
+            "writing",
+            "speaking",
+            "reading",
         ];
 
         foreach ($skills as $skill) {

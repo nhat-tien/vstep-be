@@ -12,6 +12,15 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'exam_id',
+        'skill_id',
+        'order',
+        'text',
+        'question_type',
+        'file_url',
+    ];
+
     public function skill(): BelongsTo
     {
         return $this->belongsTo(Skill::class);

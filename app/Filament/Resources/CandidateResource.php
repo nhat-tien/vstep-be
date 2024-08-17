@@ -67,7 +67,7 @@ class CandidateResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkAction::make('date')
-                    ->label('Create New Exam')
+                    ->label('Create New Schedule')
                     ->form([
                         Forms\Components\Select::make('exam_id')
                             ->options(Exam::all()->pluck('name', 'id'))

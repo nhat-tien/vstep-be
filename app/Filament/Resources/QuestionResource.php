@@ -19,6 +19,8 @@ class QuestionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -31,7 +33,12 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make("exam.name"),
+                Tables\Columns\TextColumn::make("skill.skill_name"),
+                Tables\Columns\TextColumn::make("order"),
+                Tables\Columns\TextColumn::make("question_type"),
+                Tables\Columns\TextColumn::make("file_url"),
+                Tables\Columns\TextColumn::make("text"),
             ])
             ->filters([
                 //

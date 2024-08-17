@@ -45,7 +45,7 @@ class ExamSchedulePolicy
      */
     public function delete(User $user, ExamSchedule $examSchedule): bool
     {
-        //
+       return $user->isAdmin();
     }
 
     /**

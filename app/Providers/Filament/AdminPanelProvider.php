@@ -38,6 +38,9 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->colors([
+                'primary' => Color::Blue
+            ])
             ->font(
                 "Inter",
                 url: asset('css/fonts.css'),
