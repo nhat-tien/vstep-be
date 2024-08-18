@@ -34,4 +34,23 @@ class Skill extends Model
     public static function getReadingSkillId(): int {
         return Skill::firstWhere("skill_name", "reading")->id;
     }
+
+    public static function getSkillId(string $skill_name): int
+    {
+        switch ($skill_name) {
+            case 'listening':
+                return Skill::getListeningSkillId();
+                break;
+            case 'reading':
+                return Skill::getReadingSkillId();
+                break;
+            case 'writing':
+                return Skill::getWritingSkillId();
+                break;
+            case 'speaking':
+                return Skill::getSpeakingSkillId();
+                break;
+
+        }
+    }
 }

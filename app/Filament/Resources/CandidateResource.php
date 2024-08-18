@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CandidateResource\Pages;
-use App\Filament\Resources\CandidateResource\RelationManagers;
+// use App\Filament\Resources\CandidateResource\RelationManagers;
 use App\Http\Services\Api\ExamScheduleService;
 use App\Models\Exam;
 use App\Models\User;
@@ -15,7 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+// use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
 
 class CandidateResource extends Resource

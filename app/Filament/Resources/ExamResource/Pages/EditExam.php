@@ -12,6 +12,7 @@ use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use App\Models\Exam;
+use Illuminate\Support\Str;
 
 class EditExam extends EditRecord
 {
@@ -56,10 +57,10 @@ class EditExam extends EditRecord
                     $order++;
                 }
             }
-            if(str_starts_with($question_from_model->file_url, "question-audios")) {
+            if(Str::startsWith($question_from_model->file_url, "question-audios")) {
                 $select_part['audio'] = $question_from_model->file_url;
             }
-            if(str_starts_with($question_from_model->file_url, "question-images")) {
+            if(Str::startsWith($question_from_model->file_url, "question-images")) {
                 $select_part['image'] = $question_from_model->file_url;
             }
             $question = [
