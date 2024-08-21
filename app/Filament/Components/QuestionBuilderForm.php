@@ -2,12 +2,13 @@
 
 namespace App\Filament\Components;
 
+use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\Support\Arr;
 
 class QuestionBuilderForm
 {
-    public static function schema(array $exclude = []): array
+    public static function schema(string $name, string $label,array $exclude = []): Builder
     {
         $components = [
             "para" => Block::make("para")->label("Paragraph Question")
@@ -28,6 +29,10 @@ class QuestionBuilderForm
                 ),
         ];
 
-            return Arr::except($components, $exclude);
+        return Builder::make($name)->label($label)
+                ->blocks(
+                    Arr::except($components, $exclude)
+            )->collapsible()
+            ->cloneable();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Components\QuestionBuilderForm;
 use App\Filament\Resources\ExamResource\Pages;
 use App\Models\Exam;
-use Filament\Forms\Components\Builder;
+// use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -32,24 +32,15 @@ class ExamResource extends Resource
                                     ->tabs([
                                         Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Builder::make("listening-part1")->label("Part 1")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("listening-part1", "Part 1")
                                             ]),
                                         Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Builder::make("listening-part2")->label("Part 2")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("listening-part2", "Part 2")
                                             ]),
                                         Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Builder::make("listening-part3")->label("Part 3")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("listening-part3", "Part 3")
                                             ]),
                                     ]),
                             ]),
@@ -59,31 +50,19 @@ class ExamResource extends Resource
                                     ->tabs([
                                         Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Builder::make("reading-part1")->label("Part 1")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("reading-part1","Part 1",['audio'])
                                             ]),
                                         Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Builder::make("reading-part2")->label("Part 2")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("reading-part2","Part 2",['audio'])
                                             ]),
                                         Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Builder::make("reading-part3")->label("Part 3")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("reading-part3","Part 3",['audio'])
                                             ]),
                                         Tabs\Tab::make('Part 4')
                                             ->schema([
-                                                Builder::make("reading-part4")->label("Part 4")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("reading-part4","Part 4",['audio'])
                                             ]),
                                     ]),
                             ]),
@@ -93,17 +72,11 @@ class ExamResource extends Resource
                                     ->tabs([
                                         Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Builder::make("writing-part1")->label("Part 1")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("writing-part1","Part 1",['audio'])
                                             ]),
                                         Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Builder::make("writing-part2")->label("Part 2")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("writing-part2","Part 2",['audio'])
                                             ]),
                                     ]),
                             ]),
@@ -113,24 +86,15 @@ class ExamResource extends Resource
                                     ->tabs([
                                         Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Builder::make("speaking-part1")->label("Part 1")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("speaking-part1","Part 1")
                                             ]),
                                         Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Builder::make("speaking-part2")->label("Part 2")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("speaking-part2","Part 2")
                                             ]),
                                         Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Builder::make("speaking-part2")->label("Part 2")
-                                                    ->blocks(
-                                                        QuestionBuilderForm::schema()
-                                                    )->collapsible(),
+                                                QuestionBuilderForm::schema("speaking-part3","Part 3")
                                             ]),
                                     ]),
                             ]),

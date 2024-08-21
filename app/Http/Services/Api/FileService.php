@@ -23,7 +23,5 @@ class FileService {
         return $path;
     }
 
-    //TODO:
-    public function stroreQuestionImage():void {}
 
 }
