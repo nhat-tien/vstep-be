@@ -26,8 +26,73 @@ class EditExam extends EditRecord
     }
 
     //TODO: My code suck, this need to be refactor
+    // protected function mutateFormDataBeforeFill(array $data): array
+    // {
+    //     $exam_id = $data['id'];
+    //     $questions = Exam::find($exam_id)->questions()->orderBy('order','asc')->get();
+    //     $skills = [
+    //         Skill::getListeningSkillId() => "listening",
+    //         Skill::getSpeakingSkillId() => "speaking",
+    //         Skill::getReadingSkillId() => "reading",
+    //         Skill::getWritingSkillId() => "writing",
+    //     ];
+    //     $data['listening'] = [];
+    //     $data['writing'] = [];
+    //     $data['speaking'] = [];
+    //     $data['reading'] = [];
+    //     foreach ($questions as $question_from_model) {
+    //         $select_part = [];
+    //         if($question_from_model->question_type == "select") {
+    //             $select_options_from_model = QuestionSelectOption::where('question_id', $question_from_model->id)
+    //                 ->orderBy('order','asc')
+    //                 ->get();
+    //             $answer_key = $question_from_model->answerKey()->first()?->question_select_option_id;
+    //             $keys_prefix = ["A", "B", "C", "D"];
+    //             $order = 0;
+    //             foreach ($select_options_from_model as $option) {
+    //                 $select_part[$keys_prefix[$order]] = $option->text;
+    //                 if($option->id == $answer_key) {
+    //                     $select_part['answer_key'] = $keys_prefix[$order];
+    //                 }
+    //                 $order++;
+    //             }
+    //         }
+    //         if(Str::startsWith($question_from_model->file_url, "question-audios")) {
+    //             $select_part['audio'] = $question_from_model->file_url;
+    //         }
+    //         if(Str::startsWith($question_from_model->file_url, "question-images")) {
+    //             $select_part['image'] = $question_from_model->file_url;
+    //         }
+    //         $question = [
+    //             "type" => $question_from_model->question_type,
+    //             "data" => [
+    //                 "question_id" => $question_from_model->id,
+    //                 "text" => $question_from_model->text,
+    //                 // "file_url" => $question_from_model->file_url,
+    //                 ...$select_part,
+    //             ],
+    //         ];
+    //         array_push($data[$skills[$question_from_model->skill_id]], $question);
+    //     }
+    //     return $data;
+    // }
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
+        $data = array_merge($data, [
+            "listening-part1" => [],
+            "listening-part2" => [],
+            "listening-part3" => [],
+            "reading-part1" => [],
+            "reading-part2" => [],
+            "reading-part3" => [],
+            "reading-part4" => [],
+            "writing-part1" => [],
+            "writing-part2" => [],
+            "speaking-part1" => [],
+            "speaking-part2" => [],
+            "speaking-part3" => [],
+        ]);
         $exam_id = $data['id'];
         $questions = Exam::find($exam_id)->questions()->orderBy('order','asc')->get();
         $skills = [
@@ -36,10 +101,6 @@ class EditExam extends EditRecord
             Skill::getReadingSkillId() => "reading",
             Skill::getWritingSkillId() => "writing",
         ];
-        $data['listening'] = [];
-        $data['writing'] = [];
-        $data['speaking'] = [];
-        $data['reading'] = [];
         foreach ($questions as $question_from_model) {
             $select_part = [];
             if($question_from_model->question_type == "select") {
@@ -68,30 +129,42 @@ class EditExam extends EditRecord
                 "data" => [
                     "question_id" => $question_from_model->id,
                     "text" => $question_from_model->text,
-                    // "file_url" => $question_from_model->file_url,
                     ...$select_part,
                 ],
             ];
-            array_push($data[$skills[$question_from_model->skill_id]], $question);
+            $skill_name = $skills[$question_from_model->skill_id] . "-part" . $question_from_model->part;
+            array_push($data[$skill_name], $question);
         }
+        // dd($data);
         return $data;
     }
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        // dd($data);
         // $record->update($data);
         $exam_id = $record->id;
         $questions_in_exam = Question::where('exam_id', $exam_id)->get();
         $question_id_exist_in_data = [];
-
-        $skills = [
-            "listening" => Skill::getListeningSkillId(),
-            "speaking" => Skill::getSpeakingSkillId(),
-            "reading" => Skill::getReadingSkillId(),
-            "writing" => Skill::getWritingSkillId(),
+        $listening_skill_id = Skill::getListeningSkillId();
+        $reading_skill_id = Skill::getReadingSkillId();
+        $writing_skill_id = Skill::getWritingSkillId();
+        $speaking_skill_id = Skill::getSpeakingSkillId();
+        $data_model = [
+            "listening-part1" => $listening_skill_id,
+            "listening-part2" => $listening_skill_id,
+            "listening-part3" => $listening_skill_id,
+            "reading-part1" => $reading_skill_id,
+            "reading-part2" => $reading_skill_id,
+            "reading-part3" => $reading_skill_id,
+            "reading-part4" => $reading_skill_id,
+            "writing-part1" => $writing_skill_id,
+            "writing-part2" => $writing_skill_id,
+            "speaking-part1" => $speaking_skill_id,
+            "speaking-part2" => $speaking_skill_id,
+            "speaking-part3" => $speaking_skill_id,
         ];
-
-        foreach ($skills as $skill_name => $skill_id) {
+        foreach ($data_model as $skill_name => $skill_id) {
 
             if(empty($data[$skill_name])) {
                 continue;
@@ -102,6 +175,7 @@ class EditExam extends EditRecord
             foreach ($data[$skill_name] as $question) {
                 $question_id = $question['data']['question_id'];
                 $question_type = $question['type'];
+                $part = (int) substr($skill_name,strlen($skill_name)-1,1);
 
                 if($question_id == null) {
                     $file_url = "";
@@ -115,6 +189,7 @@ class EditExam extends EditRecord
                             'order' => $count_order++,
                             'question_type' => $question_type,
                             'file_url' => $file_url,
+                            'part' => $part,
                             'text' => $question['data']['text'] ?? ""
                         ]
                     );
@@ -149,6 +224,7 @@ class EditExam extends EditRecord
                         "order" => $count_order++,
                         "question_type" => $question_type,
                         "file_url" => $file_url,
+                        "part" => $part,
                         "text" => $question['data']['text'],
                     ]);
 

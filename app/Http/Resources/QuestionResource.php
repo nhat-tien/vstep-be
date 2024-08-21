@@ -19,6 +19,7 @@ class QuestionResource extends JsonResource
             'questionId' => $this->id,
             'skillId' => $this->skill_id,
             'order' => $this->order,
+            'part' => $this->part,
             'questionType' => $this->question_type,
             'fileUrl' => $this->file_url,
             'text' => $this->text,

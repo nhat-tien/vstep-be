@@ -19,6 +19,7 @@ class Question extends Model
         'text',
         'question_type',
         'file_url',
+        'part',
     ];
 
     public function skill(): BelongsTo

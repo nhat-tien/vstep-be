@@ -3,7 +3,6 @@
 namespace App\Http\Services\Api;
 
 use App\Http\Resources\QuestionCollection;
-use App\Models\Exam;
 use App\Models\Skill;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
@@ -11,10 +10,11 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ExamService {
 
-    public function getQuestion(string $skill_name,Exam $exam): QuestionCollection
+    public function getQuestion(array $args): QuestionCollection
     {
-        $questions = $exam->questions()
-            ->where('skill_id', Skill::getSkillId($skill_name))
+        $questions = $args['exam']->questions()
+            ->where('skill_id', Skill::getSkillId($args["skill_name"]))
+            ->where('part', $args['part'])
             ->with([ 'questionSelectOptions' => function (Builder $query) {
                 $query->orderBy('order', 'asc');
             }])

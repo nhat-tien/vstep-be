@@ -2,22 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Components\QuestionBuilderForm;
 use App\Filament\Resources\ExamResource\Pages;
-use App\Http\Services\Api\FileService;
 use App\Models\Exam;
 use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ExamResource extends Resource
 {
@@ -34,219 +28,111 @@ class ExamResource extends Resource
                     ->tabs([
                         Tabs\Tab::make('Listening')
                             ->schema([
-                                Builder::make("listening")->label("Listening")
-                                    ->blocks([
-                                        Builder\Block::make("para")->label("Paragraph Question")
+                                Tabs::make('parts')
+                                    ->tabs([
+                                        Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                RichEditor::make("text")
-                                                    ->disableToolbarButtons([
-                                                        'blockquote',
-                                                        'strike',
-                                                        'codeBlock',
-                                                    ])
+                                                Builder::make("listening-part1")->label("Part 1")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("select")->label("Multi-Select Question")
+                                        Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                Section::make()->schema([
-                                                    TextInput::make("text"),
-                                                ]),
-                                                Section::make()->schema([
-                                                    ToggleButtons::make("answer_key")
-                                                        ->options([
-                                                            "A" => "A",
-                                                            "B" => "B",
-                                                            "C" => "C",
-                                                            "D" => "D",
-                                                        ])->columns(1),
-                                                        Section::make()->schema([
-                                                        TextInput::make("A"),
-                                                        TextInput::make("B"),
-                                                        TextInput::make("C"),
-                                                        TextInput::make("D"),
-                                                    ])->columnStart(2),
-                                                ])->columns(5)
+                                                Builder::make("listening-part2")->label("Part 2")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("audio")->label("Audio Attachment")
+                                        Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("audio")
-                                                    ->disk('files')
-                                                    ->directory('question-audios')
-                                                    ->acceptedFileTypes(["audio/mpeg"])
+                                                Builder::make("listening-part3")->label("Part 3")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("image")->label("Image Attachment")
-                                            ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("image")
-                                                    ->disk('files')
-                                                    ->directory('question-images')
-                                                    ->getUploadedFileNameForStorageUsing(
-                                                        fn (TemporaryUploadedFile $file): string => FileService::generateFileNameByDateTime($file),
-                                                    )
-                                                    ->image()
-                                                    ->imageEditor()
-                                            ])
-                                    ])->collapsible(),
+                                    ]),
                             ]),
                         Tabs\Tab::make('Reading')
                             ->schema([
-                                Builder::make("reading")->label("Reading")
-                                    ->blocks([
-                                        Builder\Block::make("para")->label("Paragraph Question")
+                                Tabs::make('parts')
+                                    ->tabs([
+                                        Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                RichEditor::make("text")
-                                                    ->disableToolbarButtons([
-                                                        'blockquote',
-                                                        'strike',
-                                                        'codeBlock',
-                                                    ])
+                                                Builder::make("reading-part1")->label("Part 1")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("select")->label("Multi-Select Question")
+                                        Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                Section::make()->schema([
-                                                    TextInput::make("text"),
-                                                ]),
-                                                Section::make()->schema([
-                                                    ToggleButtons::make("answer_key")
-                                                        ->options([
-                                                            "A" => "A",
-                                                            "B" => "B",
-                                                            "C" => "C",
-                                                            "D" => "D",
-                                                        ])->columns(1),
-                                                        Section::make()->schema([
-                                                        TextInput::make("A"),
-                                                        TextInput::make("B"),
-                                                        TextInput::make("C"),
-                                                        TextInput::make("D"),
-                                                    ])->columnStart(2),
-                                                ])->columns(5)
+                                                Builder::make("reading-part2")->label("Part 2")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("image")->label("Image Attachment")
+                                        Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("image")
-                                                    ->disk('files')
-                                                    ->directory('question-images')
-                                                    ->getUploadedFileNameForStorageUsing(
-                                                        fn (TemporaryUploadedFile $file): string => FileService::generateFileNameByDateTime($file),
-                                                    )
-                                                    ->image()
-                                                    ->imageEditor()
-                                            ])
-                                    ])->collapsible(),
+                                                Builder::make("reading-part3")->label("Part 3")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
+                                            ]),
+                                        Tabs\Tab::make('Part 4')
+                                            ->schema([
+                                                Builder::make("reading-part4")->label("Part 4")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
+                                            ]),
+                                    ]),
                             ]),
                         Tabs\Tab::make('Writing')
                             ->schema([
-                                Builder::make("writing")->label("Writing")
-                                    ->blocks([
-                                        Builder\Block::make("para")->label("Paragraph Question")
+                                Tabs::make('parts')
+                                    ->tabs([
+                                        Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                RichEditor::make("text")
-                                                    ->disableToolbarButtons([
-                                                        'blockquote',
-                                                        'strike',
-                                                        'codeBlock',
-                                                    ])
+                                                Builder::make("writing-part1")->label("Part 1")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("select")->label("Multi-Select Question")
+                                        Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                Section::make()->schema([
-                                                    TextInput::make("text"),
-                                                ]),
-                                                Section::make()->schema([
-                                                    ToggleButtons::make("answer_key")
-                                                        ->options([
-                                                            "A" => "A",
-                                                            "B" => "B",
-                                                            "C" => "C",
-                                                            "D" => "D",
-                                                        ])->columns(1),
-                                                        Section::make()->schema([
-                                                        TextInput::make("A"),
-                                                        TextInput::make("B"),
-                                                        TextInput::make("C"),
-                                                        TextInput::make("D"),
-                                                    ])->columnStart(2),
-                                                ])->columns(5)
+                                                Builder::make("writing-part2")->label("Part 2")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("image")->label("Image Attachment")
-                                            ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("image")
-                                                    ->disk('files')
-                                                    ->directory('question-images')
-                                                    ->getUploadedFileNameForStorageUsing(
-                                                        fn (TemporaryUploadedFile $file): string => FileService::generateFileNameByDateTime($file),
-                                                    )
-                                                    ->image()
-                                                    ->imageEditor()
-                                            ])
-                                    ])->collapsible(),
+                                    ]),
                             ]),
                         Tabs\Tab::make('Speaking')
                             ->schema([
-                                Builder::make("speaking")->label("Speaking")
-                                    ->blocks([
-                                        Builder\Block::make("para")->label("Paragraph Question")
+                                Tabs::make('parts')
+                                    ->tabs([
+                                        Tabs\Tab::make('Part 1')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                RichEditor::make("text")
-                                                    ->disableToolbarButtons([
-                                                        'blockquote',
-                                                        'strike',
-                                                        'codeBlock',
-                                                    ])
+                                                Builder::make("speaking-part1")->label("Part 1")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("select")->label("Multi-Select Question")
+                                        Tabs\Tab::make('Part 2')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                Section::make()->schema([
-                                                    TextInput::make("text"),
-                                                ]),
-                                                Section::make()->schema([
-                                                    ToggleButtons::make("answer_key")
-                                                        ->options([
-                                                            "A" => "A",
-                                                            "B" => "B",
-                                                            "C" => "C",
-                                                            "D" => "D",
-                                                        ])->columns(1),
-                                                        Section::make()->schema([
-                                                        TextInput::make("A"),
-                                                        TextInput::make("B"),
-                                                        TextInput::make("C"),
-                                                        TextInput::make("D"),
-                                                    ])->columnStart(2),
-                                                ])->columns(5)
+                                                Builder::make("speaking-part2")->label("Part 2")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("audio")->label("Audio Attachment")
+                                        Tabs\Tab::make('Part 3')
                                             ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("audio")
-                                                    ->disk('files')
-                                                    ->directory('question-audios')
-                                                    ->acceptedFileTypes(["audio/mpeg"])
+                                                Builder::make("speaking-part2")->label("Part 2")
+                                                    ->blocks(
+                                                        QuestionBuilderForm::schema()
+                                                    )->collapsible(),
                                             ]),
-                                        Builder\Block::make("image")->label("Image Attachment")
-                                            ->schema([
-                                                Hidden::make("question_id"),
-                                                FileUpload::make("image")
-                                                    ->disk('files')
-                                                    ->directory('question-images')
-                                                    ->getUploadedFileNameForStorageUsing(
-                                                        fn (TemporaryUploadedFile $file): string => FileService::generateFileNameByDateTime($file),
-                                                    )
-                                                    ->image()
-                                                    ->imageEditor()
-                                            ])
-                                    ])->collapsible(),
+                                    ]),
                             ]),
                     ])
             ])->columns(1);
