@@ -14,10 +14,10 @@ class ImageQuestionForm
         return [
             Hidden::make("question_id"),
             FileUpload::make("image")
-                ->disk('files')
+                ->disk('public')
                 ->directory('question-images')
                 ->getUploadedFileNameForStorageUsing(
-                    fn (TemporaryUploadedFile $file): string => FileService::generateFileNameByDateTime($file),
+                    fn (TemporaryUploadedFile $file): string => FileService::generateFileNameWithDateTime($file),
                 )
                 ->image()
                 ->imageEditor()

@@ -7,6 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/storage/files/{slug}',[FilesController::class, 'getFile'])
-    ->where('slug', '.*');
+// Route::get('/storage/files/{slug}',[FilesController::class, 'getFile'])
+//     ->where('slug', '.*');
 

@@ -12,7 +12,7 @@ class AudioQuestionForm
         return [
             Hidden::make("question_id"),
             FileUpload::make("audio")
-                ->disk('files')
+                ->disk('public')
                 ->directory('question-audios')
                 ->acceptedFileTypes(["audio/mpeg"])
         ];

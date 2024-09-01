@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\SkillIdNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -50,7 +51,9 @@ class Skill extends Model
             case 'speaking':
                 return Skill::getSpeakingSkillId();
                 break;
-
+            default:
+                throw new SkillIdNotFoundException();
+                break;
         }
     }
 }

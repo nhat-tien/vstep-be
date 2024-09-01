@@ -3,9 +3,10 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ExamController;
 use App\Http\Controllers\Api\ExamScheduleController;
+use App\Http\Controllers\Api\ResultController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AnswerController;
 
 Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], function () {
 
@@ -15,14 +16,27 @@ Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], func
 
     Route::group(["middleware" => "auth:sanctum"], function () {
 
-        Route::get('/me', [UserController::class, 'show']);
+        Route::get('/profile', [UserController::class, 'show']);
 
         Route::delete('/logout', [AuthController::class, 'logout']);
 
-        Route::post('/avatar', [FilesController::class, 'setAvatar']);
+        Route::post('/schedules/avatar', [ExamScheduleController::class, 'setAvatar']);
 
-        Route::get('/schedules', [ExamScheduleController::class, 'getSchedule']);
+        Route::put('/result/start-time', [ResultController::class, 'updateStartTime']);
 
-        Route::get('/exam/{exam}', [ExamController::class, 'getQuestions']);
+        Route::get('/result/start-time', [ResultController::class, 'getStartTime']);
+
+        Route::put('/result/end-time', [ResultController::class, 'updateEndTime']);
+
+        Route::get('/result/end-time', [ResultController::class, 'getEndTime']);
+
+        Route::get('/schedules', [ExamScheduleController::class, 'show']);
+
+        Route::get('/exam/{exam}', [ExamController::class, 'index']);
+
+        Route::put('/answers', [AnswerController::class, 'submitAnswer']);
+
+        Route::put('/answers/audio', [AnswerController::class, 'submitAudioAnswer']);
+
     });
 });
