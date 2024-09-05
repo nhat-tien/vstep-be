@@ -34,16 +34,17 @@ class ScheduleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('date')->label("Date"),
+                Tables\Columns\TextColumn::make('date')->date('d/m/Y')->label("Date"),
                 Tables\Columns\TextColumn::make('user.name')->label("Candidate"),
                 Tables\Columns\TextColumn::make('exam.name')->label("Exam"),
-                Tables\Columns\ImageColumn::make('image_url')->label("Avatar")->disk("files"),
+                Tables\Columns\ImageColumn::make('image_url')->label("Avatar")->disk("public"),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

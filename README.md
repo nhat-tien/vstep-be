@@ -6,5 +6,5 @@
 ## Todo
 
 - [ ] Confirm action when edit exam
-- [ ] Remove file in storage when it not used in model anymore
-
+- [ ] Confirm valid schedule when submit answer
+- [x] Remove file in storage when it not used in model anymore

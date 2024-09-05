@@ -14,7 +14,7 @@ class ImageQuestionForm
         return [
             Hidden::make("question_id"),
             FileUpload::make("image")
-                ->disk('public')
+                ->disk(FileService::$disk)
                 ->directory('question-images')
                 ->getUploadedFileNameForStorageUsing(
                     fn (TemporaryUploadedFile $file): string => FileService::generateFileNameWithDateTime($file),

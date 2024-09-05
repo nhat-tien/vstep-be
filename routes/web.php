@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,4 +8,3 @@ Route::get('/', function () {
 
 // Route::get('/storage/files/{slug}',[FilesController::class, 'getFile'])
 //     ->where('slug', '.*');
-

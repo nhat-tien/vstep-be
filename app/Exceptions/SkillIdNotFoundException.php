@@ -10,7 +10,7 @@ class SkillIdNotFoundException extends Exception
     public function render(): JsonResponse
     {
         return response()->json([
-            'status' => 500,
+            'status' => 404,
             'message' => 'Skill id not found'
         ]);
     }

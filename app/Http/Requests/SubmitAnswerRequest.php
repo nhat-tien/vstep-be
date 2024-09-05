@@ -22,12 +22,11 @@ class SubmitAnswerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "skillName" => ['required','string'],
             "scheduleId" => ['required','numeric'],
             "answers" => ['required', 'array'],
             "answers.*.questionId" => ['required'],
-            "answers.*.selectOptionId" => ['sometimes','required'],
-            "answers.*.text" => ['sometimes', 'required']
+            "answers.*.selectOptionId" => ['sometimes','required', 'numeric'],
+            "answers.*.text" => ['sometimes', 'required', 'string']
         ];
     }
 }

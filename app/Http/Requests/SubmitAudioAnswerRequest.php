@@ -24,7 +24,7 @@ class SubmitAudioAnswerRequest extends FormRequest
         return [
             "questionId" => ['required','numeric'],
             "scheduleId" => ['required','numeric'],
-            "audio" => ['required', 'file']
+            "audio" => ['required', 'file', 'extensions:mp3']
         ];
     }
 }

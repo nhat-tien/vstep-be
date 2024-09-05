@@ -113,6 +113,15 @@ class ExamResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->after(function (Exam $exam) {
+                        $questions = $exam->questions();
+                        foreach ($questions as $question) {
+                            $question->questionSelectOptions()->delete();
+                            $question->answerKeys()->delete();
+                        }
+                        $questions->delete();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

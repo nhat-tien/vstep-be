@@ -16,9 +16,13 @@ class AnswerKeyResource extends Resource
 {
     protected static ?string $model = AnswerKey::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
+
+    protected static ?string $navigationGroup = 'Questions';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -34,6 +38,7 @@ class AnswerKeyResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('question_id'),
                 Tables\Columns\TextColumn::make('question_select_option_id'),
+                Tables\Columns\TextColumn::make('questionSelectOption.text')->label('Text'),
             ])
             ->filters([
                 //

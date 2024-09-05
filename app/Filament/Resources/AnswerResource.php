@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ResultResource\Pages;
-use App\Filament\Resources\ResultResource\RelationManagers;
-use App\Models\Result;
+use App\Filament\Resources\AnswerResource\Pages;
+use App\Filament\Resources\AnswerResource\RelationManagers;
+use App\Models\Answer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,18 +13,24 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ResultResource extends Resource
+class AnswerResource extends Resource
 {
-    protected static ?string $model = Result::class;
+    protected static ?string $model = Answer::class;
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Results';
 
+    // protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('audio_url')
+                    ->disk('public')
+                    ->directory('answer-audio')
+                    ->label("Audio")
             ]);
     }
 
@@ -32,17 +38,15 @@ class ResultResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('exam_schedule_id')->label('Schedule Id'),
-                Tables\Columns\TextColumn::make('start_time'),
-                Tables\Columns\TextColumn::make('end_time'),
-                Tables\Columns\TextColumn::make('skill.skill_name'),
-                Tables\Columns\TextColumn::make('score'),
+                Tables\Columns\TextColumn::make('question_id'),
+                Tables\Columns\TextColumn::make('exam_schedule_id'),
+                Tables\Columns\TextColumn::make('questionSelectOption.text'),
+                Tables\Columns\TextColumn::make('text'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
@@ -62,9 +66,10 @@ class ResultResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListResults::route('/'),
-            'create' => Pages\CreateResult::route('/create'),
-            // 'edit' => Pages\EditResult::route('/{record}/edit'),
+            'index' => Pages\ListAnswers::route('/'),
+            'create' => Pages\CreateAnswer::route('/create'),
+            'view' => Pages\ViewAnswer::route('/{record}'),
+            'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
     }
 }

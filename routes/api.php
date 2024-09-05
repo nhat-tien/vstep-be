@@ -24,11 +24,9 @@ Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], func
 
         Route::put('/result/start-time', [ResultController::class, 'updateStartTime']);
 
-        Route::get('/result/start-time', [ResultController::class, 'getStartTime']);
-
         Route::put('/result/end-time', [ResultController::class, 'updateEndTime']);
 
-        Route::get('/result/end-time', [ResultController::class, 'getEndTime']);
+        Route::get('/result/time', [ResultController::class, 'getTime']);
 
         Route::get('/schedules', [ExamScheduleController::class, 'show']);
 
@@ -36,7 +34,7 @@ Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], func
 
         Route::put('/answers', [AnswerController::class, 'submitAnswer']);
 
-        Route::put('/answers/audio', [AnswerController::class, 'submitAudioAnswer']);
+        Route::post('/answers/audio', [AnswerController::class, 'submitAudioAnswer']);
 
     });
 });

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
         // JsonResource::withoutWrapping();
+        FilamentAsset::register([
+            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/app.css'),
+        ]);
     }
 }

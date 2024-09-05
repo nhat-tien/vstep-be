@@ -18,9 +18,8 @@ class ExamScheduleController extends Controller
 
     public function show(Request $request): ExamScheduleResource
     {
-        //TODO: add order by date to get latest exam
         $user_id = $request->user()->id;
-        $schedule = ExamSchedule::where('user_id', $user_id)->first();
+        $schedule = ExamSchedule::where('user_id', $user_id)->orderBy('date', 'DESC')->first();
         return new ExamScheduleResource($schedule);
     }
 

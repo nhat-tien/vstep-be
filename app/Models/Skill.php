@@ -20,6 +20,12 @@ class Skill extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
+    }
+
+
     public static function getListeningSkillId(): int {
         return Skill::firstWhere("skill_name", "listening")->id;
     }

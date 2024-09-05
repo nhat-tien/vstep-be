@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Api;
 
-use App\Filament\Resources\ResultResource;
+use App\Http\Resources\ResultResource;
 use App\Models\Result;
 use App\Models\Skill;
 
@@ -15,14 +15,13 @@ class ResultService
             $result = Result::where('exam_schedule_id', $dataFromRequest['scheduleId'])
                 ->where('skill_id', $skill_id)
                 ->first();
-
             if($result != null && $result->start_time != null) {
                 return [
                    'status' => 400,
-                    'message' => 'Update start time not allow'
+                   'message' => 'Update start time not allow'
                 ];
             }
-            $result = Result::updateOrCreate([
+            $result = Result::updateOrCreate(
                 [
                     'exam_schedule_id' => $dataFromRequest['scheduleId'],
                     'skill_id' => $skill_id,
@@ -30,7 +29,7 @@ class ResultService
                 [
                     'start_time' => $this->getTimestampNow(),
                 ]
-            ]);
+            );
             return [
                 "status" => 200,
                 "data" => new ResultResource($result),
@@ -51,13 +50,13 @@ class ResultService
             $result = Result::where('exam_schedule_id', $dataFromRequest['scheduleId'])
                 ->where('skill_id', $skill_id)
                 ->first();
-            if($result != null && $result->start_time != null) {
+            if($result != null && $result->end_time != null) {
                 return [
                    'status' => 400,
-                    'message' => 'Update start time not allow'
+                    'message' => 'Update end time not allow'
                 ];
             }
-            $result = Result::updateOrCreate([
+            $result = Result::updateOrCreate(
                 [
                     'exam_schedule_id' => $dataFromRequest['scheduleId'],
                     'skill_id' => $skill_id,
@@ -65,7 +64,7 @@ class ResultService
                 [
                     'start_time' => $this->getTimestampNow(),
                 ]
-            ]);
+            );
             return [
                 "status" => 200,
                 "data" => new ResultResource($result),
