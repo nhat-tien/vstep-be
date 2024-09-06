@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger("question_id");
             $table->tinyInteger("order");
-            $table->string("text");
+            $table->string("text")->nullable();
             $table->timestamps();
         });
     }

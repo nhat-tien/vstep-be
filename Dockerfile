@@ -5,7 +5,7 @@ FROM php:8.3-cli-alpine as php-base
     RUN apk update && \
         apk add --no-cache --virtual php_dependencies $PHPIZE_DEPS && \
         apk add --no-cache libstdc++ zip unzip libzip-dev icu-dev brotli-dev && \
-        docker-php-ext-install bcmath ctype pdo_mysql pcntl intl zip && \
+        docker-php-ext-install bcmath ctype pdo_mysql pcntl intl zip pdo_sqlite && \
         pecl install swoole && \
         docker-php-ext-enable swoole && \
         apk del php_dependencies && \
