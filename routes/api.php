@@ -30,6 +30,8 @@ Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], func
 
         Route::get('/schedules', [ExamScheduleController::class, 'show']);
 
+        Route::post('/schedules/done', [ExamScheduleController::class, 'done']);
+
         Route::get('/exam/{exam}', [ExamController::class, 'index']);
 
         Route::put('/answers', [AnswerController::class, 'submitAnswer']);

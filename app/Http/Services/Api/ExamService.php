@@ -6,10 +6,8 @@ use App\Http\Resources\QuestionCollection;
 use App\Models\Skill;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-
-
-class ExamService {
-
+class ExamService
+{
     public function getQuestion(array $args): QuestionCollection
     {
         $questions = $args['exam']->questions()
@@ -23,5 +21,5 @@ class ExamService {
         return new QuestionCollection($questions);
     }
 
-}
 
+}

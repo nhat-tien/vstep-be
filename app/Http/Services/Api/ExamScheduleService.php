@@ -5,6 +5,7 @@ namespace App\Http\Services\Api;
 use App\Models\ExamSchedule;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Collection;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ExamScheduleService
 {
@@ -39,6 +40,17 @@ class ExamScheduleService
             Notification::make()->success()->title('Success')->icon('heroicon-o-check')->send();
         } catch (\Throwable $th) {
             Notification::make()->danger()->title('Something went wrong')->body($th->getMessage())->send();
+        }
+    }
+
+    public function done(array $request): void
+    {
+        try {
+            $exam_schedule = ExamSchedule::find($request['scheduleId']);
+            $exam_schedule->done = true;
+            $exam_schedule->save();
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
         }
     }
 }

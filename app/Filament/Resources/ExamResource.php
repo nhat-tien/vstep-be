@@ -4,20 +4,30 @@ namespace App\Filament\Resources;
 
 use App\Filament\Components\QuestionBuilderForm;
 use App\Filament\Resources\ExamResource\Pages;
+use App\Http\Services\Api\ExamService;
 use App\Models\Exam;
 // use Filament\Forms\Components\Builder;
+use App\Models\QuestionSelectOption;
+use App\Models\Skill;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Infolist;
+use Filament\Infolists;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class ExamResource extends Resource
 {
     protected static ?string $model = Exam::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public function __construct(private ExamService $service)
+    {
+    }
 
     public static function form(Form $form): Form
     {
@@ -102,6 +112,7 @@ class ExamResource extends Resource
             ])->columns(1);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
@@ -112,6 +123,7 @@ class ExamResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->after(function (Exam $exam) {
@@ -143,6 +155,7 @@ class ExamResource extends Resource
             'index' => Pages\ListExams::route('/'),
             'create' => Pages\CreateExam::route('/create'),
             'edit' => Pages\EditExam::route('/{record}/edit'),
+            'view' => Pages\ViewExam::route('/{record}'),
         ];
     }
 }
