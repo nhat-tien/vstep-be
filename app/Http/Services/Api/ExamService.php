@@ -22,5 +22,15 @@ class ExamService
         return new QuestionCollection($questions);
     }
 
+    public function getCountSelectQuestion(array $args): int
+    {
+        $count = $args['exam']->questions()
+            ->where('skill_id', Skill::getSkillId($args["skill_name"]))
+            ->where('part', $args['part'])
+            ->where('question_type', 'select')
+            ->count();
+        return $count;
+    }
+
 
 }

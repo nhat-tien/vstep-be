@@ -34,6 +34,8 @@ Route::group(["prefix" => "v1", "namespace" => "App\Http\Controllers\Api"], func
 
         Route::get('/exam/{exam}', [ExamController::class, 'index']);
 
+        Route::get('/exam/{exam}/count', [ExamController::class, 'countSelectQuestion']);
+
         Route::put('/answers', [AnswerController::class, 'submitAnswer']);
 
         Route::post('/answers/audio', [AnswerController::class, 'submitAudioAnswer']);
