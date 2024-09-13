@@ -44,6 +44,7 @@ class ExamScheduleController extends Controller
         $path = $this->service->setAvatar($request->safe()->only(['examScheduleId', 'avatar']));
 
         return response()->json([
+            "status" => 200,
             "path" => $path
         ]);
     }
