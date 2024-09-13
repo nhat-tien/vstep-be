@@ -13,6 +13,7 @@ class ExamService
         $questions = $args['exam']->questions()
             ->where('skill_id', Skill::getSkillId($args["skill_name"]))
             ->where('part', $args['part'])
+            ->orderBy('order','asc')
             ->with([ 'questionSelectOptions' => function (Builder $query) {
                 $query->orderBy('order', 'asc');
             }])
