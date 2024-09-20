@@ -8,3 +8,11 @@
 - [ ] Confirm action when edit exam
 - [ ] Confirm valid schedule when submit answer
 - [x] Remove file in storage when it not used in model anymore
+
+## Cache
+
+```bash
+php artisan icons:cache
+php artisan view:cache
+php artisan filament:cache-components
+```

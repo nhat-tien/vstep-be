@@ -37,7 +37,6 @@ class AnswerService
     {
         $exam_schedule_id = $request->scheduleId;
         $question_id = $request->questionId;
-        $audio_path = $this->file->storeAudioAnswer($request->only('audio'));
 
         $answer = Answer::where("exam_schedule_id",$exam_schedule_id)
             ->where("question_id", $question_id)->first();
@@ -46,6 +45,8 @@ class AnswerService
            throw new HttpException(500,"Answer already exist");
 
         }
+
+        $audio_path = $this->file->storeAudioAnswer($request->only('audio'));
 
         $answer = Answer::create([
             "exam_schedule_id" => $exam_schedule_id,

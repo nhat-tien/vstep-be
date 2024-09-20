@@ -42,6 +42,7 @@ class AnswerResource extends Resource
                 Tables\Columns\TextColumn::make('exam_schedule_id'),
                 Tables\Columns\TextColumn::make('questionSelectOption.text'),
                 Tables\Columns\TextColumn::make('text'),
+                Tables\Columns\TextColumn::make('audio_url')
             ])
             ->filters([
                 //
